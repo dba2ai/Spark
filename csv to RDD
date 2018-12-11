@@ -5,3 +5,8 @@ rdd = sc.parallelize(data)
 Read a text file from HDFS:
 data = sc.textFile('/user/asvishnu/filetypes/text/part-m-00000')
 
+from pyspark import Row
+data = sc.textFile('/user/asvishnu/filetypes/text/part-m-00000')
+dmap = data.map(lambda o: Row(order_id=int(o.split(',')[0]),order_date=str(o.split(',')[1]),order_item=int(o.split(',')[2]),order_status=str(o.split(',')[3])))
+ddf = dmap.toDF()
+ddf.write.json('/user/asvishnu/filetypes/json')
