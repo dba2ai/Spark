@@ -1,3 +1,7 @@
+Read Text File from a local filesystem:
 data = open('/home/asvishnu/retail_db/orders/part-00000').read().splitlines()
 rdd = sc.parallelize(data)
-rdd.count()
+
+Read a text file from HDFS:
+data = sc.textFile('/user/asvishnu/filetypes/text/part-m-00000')
+
